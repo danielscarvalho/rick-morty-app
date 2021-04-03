@@ -38,14 +38,7 @@ function RickMortyController() {
     }
 
     this.buildCharacters = (results) => {
-        let endPoint = 'character';
-        let htmlContent = ``;
-        htmlContent += `
-            <div class="cflex_row">
-                <input type="text" placeholder="Digite um nome" id="input-search" class="search_input" ></input>
-                <button class="btn search_btn" onclick="RickMortyController.seachTerm('${endPoint}')"><i class="material-icons">search</i></button>
-            </div>
-        `;
+        let htmlContent = RickMortyController.buildSearchInput('character');
 
         results.forEach(item => {
             htmlContent += `
@@ -53,25 +46,12 @@ function RickMortyController() {
             `;
         });
 
-        htmlContent += `
-            <div class="cflex_row cflex_jc_center cflex_ai_center">
-                <button class="btn pagination_btn" onclick="RickMortyController.next('${endPoint}')"><i class="material-icons">keyboard_arrow_left</i></button>
-                <div class="pagination_txt">${this.currentPage} de ${this.pageSize}</div>
-                <button class="btn pagination_btn" onclick="RickMortyController.previuos('${endPoint}')"><i class="material-icons">keyboard_arrow_right</i></button>
-            </div>
-        `;
+        htmlContent += RickMortyController.buildPaginationControl('character');
         $('#container').html(htmlContent);
     }
 
     this.buildLocations = (results) => {
-        let endPoint = 'location';
-        let htmlContent = ``;
-        htmlContent += `
-            <div class="cflex_row">
-                <input type="text" placeholder="Digite um nome" id="input-search" class="search_input" ></input>
-                <button class="btn search_btn" onclick="RickMortyController.seachTerm('${endPoint}')"><i class="material-icons">search</i></button>
-            </div>
-        `;
+        let htmlContent = RickMortyController.buildSearchInput('location');
 
         results.forEach(item => {
             htmlContent += `
@@ -79,25 +59,12 @@ function RickMortyController() {
             `;
         });
 
-        htmlContent += `
-            <div class="cflex_row cflex_jc_center cflex_ai_center">
-                <button class="btn pagination_btn" onclick="RickMortyController.next('${endPoint}')"><i class="material-icons">keyboard_arrow_left</i></button>
-                <div class="pagination_txt">${this.currentPage} de ${this.pageSize}</div>
-                <button class="btn pagination_btn" onclick="RickMortyController.previuos('${endPoint}')"><i class="material-icons">keyboard_arrow_right</i></button>
-            </div>
-        `;
+        htmlContent += RickMortyController.buildPaginationControl('location');
         $('#container').html(htmlContent);
     }
 
     this.buildEpisodes = (results) => {
-        let endPoint = 'episode';
-        let htmlContent = ``;
-        htmlContent += `
-            <div class="cflex_row">
-                <input type="text" placeholder="Digite um nome" id="input-search" class="search_input" ></input>
-                <button class="btn search_btn" onclick="RickMortyController.seachTerm('${endPoint}')"><i class="material-icons">search</i></button>
-            </div>
-        `;
+        let htmlContent = RickMortyController.buildSearchInput('episode');
 
         results.forEach(item => {
             htmlContent += `
@@ -105,14 +72,27 @@ function RickMortyController() {
             `;
         });
 
-        htmlContent += `
+        htmlContent += RickMortyController.buildPaginationControl('episode');
+        $('#container').html(htmlContent);
+    }
+
+    this.buildSearchInput = (endPoint) => {
+        return `
+            <div class="cflex_row">
+                <input type="text" placeholder="Digite um nome" id="input-search" class="search_input" ></input>
+                <button class="btn search_btn" onclick="RickMortyController.seachTerm('${endPoint}')"><i class="material-icons">search</i></button>
+            </div>
+        `;
+    }
+
+    this.buildPaginationControl = (endPoint) => {
+        return `
             <div class="cflex_row cflex_jc_center cflex_ai_center">
                 <button class="btn pagination_btn" onclick="RickMortyController.next('${endPoint}')"><i class="material-icons">keyboard_arrow_left</i></button>
                 <div class="pagination_txt">${this.currentPage} de ${this.pageSize}</div>
                 <button class="btn pagination_btn" onclick="RickMortyController.previuos('${endPoint}')"><i class="material-icons">keyboard_arrow_right</i></button>
             </div>
         `;
-        $('#container').html(htmlContent);
     }
 
     this.pageSize = 0;
@@ -155,19 +135,15 @@ RickMortyController.getInstance = () => {
 RickMortyController.init = () => {
     RickMortyController.getInstance().init();
 }
-
 RickMortyController.getCharacters = (parameter, value) => {
     RickMortyController.getInstance().getCharacters(parameter, value);
 }
-
 RickMortyController.getLocations = (parameter, value) => {
     RickMortyController.getInstance().getLocations(parameter, value);
 }
-
 RickMortyController.getEpisodes = (parameter, value) => {
     RickMortyController.getInstance().getEpisodes(parameter, value);
 }
-
 RickMortyController.buildCharacters = (results) => {
     RickMortyController.getInstance().buildCharacters(results);
 }
@@ -177,18 +153,21 @@ RickMortyController.buildLocations = (results) => {
 RickMortyController.buildEpisodes = (results) => {
     RickMortyController.getInstance().buildEpisodes(results);
 }
+RickMortyController.buildSearchInput = (endPoint) => {
+    return RickMortyController.getInstance().buildSearchInput(endPoint);
+}
+RickMortyController.buildPaginationControl = (endPoint) => {
+    return RickMortyController.getInstance().buildPaginationControl(endPoint);
+}
 RickMortyController.next = (endPoint) => {
     RickMortyController.getInstance().next(endPoint);
 }
-
 RickMortyController.previuos = (endPoint) => {
     RickMortyController.getInstance().previuos(endPoint);
 }
-
 RickMortyController.seachTerm = (endPoint) => {
     RickMortyController.getInstance().seachTerm(endPoint);
 }
-
 RickMortyController.directEndPoint = (endPoint, parameter, value) => {
     RickMortyController.getInstance().directEndPoint(endPoint, parameter, value);
 }
