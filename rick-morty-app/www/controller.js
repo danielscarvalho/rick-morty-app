@@ -48,6 +48,9 @@ function RickMortyController() {
 
         cardContainerHTML += `
             <button onclick="RickMortyController.next('${endPoint}')"><</button>
+            <div>${this.currentPage}</div>
+            <div> de </div>
+            <div>${this.pageSize}</div>
             <button onclick="RickMortyController.previuos('${endPoint}')">></button>
         `;
         $('container').html(cardContainerHTML);
@@ -68,6 +71,9 @@ function RickMortyController() {
 
         cardContainerHTML += `
             <button onclick="RickMortyController.next('${endPoint}')"><</button>
+            <div>${this.currentPage}</div>
+            <div> de </div>
+            <div>${this.pageSize}</div>
             <button onclick="RickMortyController.previuos('${endPoint}')">></button>
         `;
         $('container').html(cardContainerHTML);
@@ -88,6 +94,9 @@ function RickMortyController() {
 
         cardContainerHTML += `
             <button onclick="RickMortyController.next('${endPoint}')"><</button>
+            <div>${this.currentPage}</div>
+            <div> de </div>
+            <div>${this.pageSize}</div>
             <button onclick="RickMortyController.previuos('${endPoint}')">></button>
         `;
         $('container').html(cardContainerHTML);
