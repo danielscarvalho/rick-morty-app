@@ -5,31 +5,54 @@
 
         <!--default cordova-->
         <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-        <meta name="color-scheme" content="light dark">
 
-        <title>Hello World</title>
+        <title>Rick and Morty</title>
+
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
         <!-- materialize -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
         <link rel="stylesheet" href="css/index.css">
-        <script type="text/javascript" src="controller.js" />
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js" />
+        <script type="text/javascript" src="controller.js"></script>
+        
 
+        <script type="text/javascript">
+            window.onload = function () {
+                var elem = document.querySelector('.sidenav');
+                var instance = new M.Sidenav(elem);
+
+                RickMortyController.init();
+            }
+        </script>
+        
     </head>
     <body>
+        
+        <ul id="slide-out" class="sidenav">
+            <li>
+                <div class="cflex_row sidenav_item cflex_ai_center waves-effect sidenav-close" onclick="RickMortyController.getCharacters()">
+                    <i class="material-icons sidenav_icon">person</i>Personagens
+                </div>
+            </li>
+            <li>
+                <div class="cflex_row sidenav_item cflex_ai_center waves-effect sidenav-close" onclick="RickMortyController.getLocations()">
+                    <i class="material-icons sidenav_icon">location_on</i>Locais
+                </div>
+            </li>
+            <li>
+                <div class="cflex_row sidenav_item cflex_ai_center waves-effect sidenav-close" onclick="RickMortyController.getEpisodes()">
+                    <i class="material-icons sidenav_icon">live_tv</i>Episódios
+                </div>
+            </li>
+        </ul>
+        <a data-target="slide-out" class="btn sidenav-trigger sidenav_btn"><i class="material-icons">menu</i></a>
 
-        <div></div> <!--menu-->
 
-        <div id="container"> <!--input + cards-->
-
-        </div>
-
-        <div></div> <!--pagination buttons-->
-
+        <div id="container" class="cflex_col"></div>
 
     </body>
 </html>

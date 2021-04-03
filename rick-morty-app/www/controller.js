@@ -1,5 +1,9 @@
 function RickMortyController() {
 
+    this.init = () => {
+        RickMortyController.getCharacters();
+    }
+
     this.getCharacters = (parameter, value) => {
         fetch(`https://rickandmortyapi.com/api/character/?${parameter}=${value}`)
             .then(response => response.json())
@@ -35,71 +39,80 @@ function RickMortyController() {
 
     this.buildCharacters = (results) => {
         let endPoint = 'character';
-        const cardContainerHTML = ``;
-        cardContainerHTML += `
-            <input id="input-search" onclick="RickMortyController.seachTerm('${endPoint}'))"></input>
+        let htmlContent = ``;
+        htmlContent += `
+            <div class="cflex_row">
+                <input type="text" placeholder="Digite um nome" id="input-search" class="search_input" ></input>
+                <button class="btn search_btn" onclick="RickMortyController.seachTerm('${endPoint}')"><i class="material-icons">search</i></button>
+            </div>
         `;
 
         results.forEach(item => {
-            cardContainerHTML += `
+            htmlContent += `
                 <div>${item.name}</div>
             `;
         });
 
-        cardContainerHTML += `
-            <button onclick="RickMortyController.next('${endPoint}')"><</button>
-            <div>${this.currentPage}</div>
-            <div> de </div>
-            <div>${this.pageSize}</div>
-            <button onclick="RickMortyController.previuos('${endPoint}')">></button>
+        htmlContent += `
+            <div class="cflex_row cflex_jc_center cflex_ai_center">
+                <button class="btn" onclick="RickMortyController.next('${endPoint}')"><i class="material-icons">keyboard_arrow_left</i></button>
+                <div class="pagination_txt">${this.currentPage} de ${this.pageSize}</div>
+                <button class="btn" onclick="RickMortyController.previuos('${endPoint}')"><i class="material-icons">keyboard_arrow_right</i></button>
+            </div>
         `;
-        $('container').html(cardContainerHTML);
+        $('#container').html(htmlContent);
     }
 
     this.buildLocations = (results) => {
         let endPoint = 'location';
-        const cardContainerHTML = ``;
-        cardContainerHTML += `
-            <input id="input-search" onclick="RickMortyController.seachTerm('${endPoint}'))"></input>
+        let htmlContent = ``;
+        htmlContent += `
+            <div class="cflex_row">
+                <input type="text" placeholder="Digite um nome" id="input-search" class="search_input" ></input>
+                <button class="btn search_btn" onclick="RickMortyController.seachTerm('${endPoint}')"><i class="material-icons">search</i></button>
+            </div>
         `;
 
         results.forEach(item => {
-            cardContainerHTML += `
+            htmlContent += `
                 <div>${item.name}</div>
             `;
         });
 
-        cardContainerHTML += `
-            <button onclick="RickMortyController.next('${endPoint}')"><</button>
-            <div>${this.currentPage}</div>
-            <div> de </div>
-            <div>${this.pageSize}</div>
-            <button onclick="RickMortyController.previuos('${endPoint}')">></button>
+        htmlContent += `
+            <div class="cflex_row cflex_jc_center cflex_ai_center">
+                <button class="btn" onclick="RickMortyController.next('${endPoint}')"><i class="material-icons">keyboard_arrow_left</i></button>
+                <div class="pagination_txt">${this.currentPage} de ${this.pageSize}</div>
+                <button class="btn" onclick="RickMortyController.previuos('${endPoint}')"><i class="material-icons">keyboard_arrow_right</i></button>
+            </div>
         `;
-        $('container').html(cardContainerHTML);
+        $('#container').html(htmlContent);
     }
 
     this.buildEpisodes = (results) => {
         let endPoint = 'episode';
-        const cardContainerHTML = ``;
-        cardContainerHTML += `
-            <input id="input-search" onclick="RickMortyController.seachTerm('${endPoint}'))"></input>
+        let htmlContent = ``;
+        htmlContent += `
+            <div class="cflex_row">
+                <input type="text" placeholder="Digite um nome" id="input-search" class="search_input" ></input>
+                <button class="btn search_btn" onclick="RickMortyController.seachTerm('${endPoint}')"><i class="material-icons">search</i></button>
+            </div>
         `;
 
         results.forEach(item => {
-            cardContainerHTML += `
+            htmlContent += `
                 <div>${item.name}</div>
             `;
         });
 
-        cardContainerHTML += `
-            <button onclick="RickMortyController.next('${endPoint}')"><</button>
-            <div>${this.currentPage}</div>
-            <div> de </div>
-            <div>${this.pageSize}</div>
-            <button onclick="RickMortyController.previuos('${endPoint}')">></button>
+        htmlContent += `
+            <div class="cflex_row cflex_jc_center cflex_ai_center">
+                <button class="btn" onclick="RickMortyController.next('${endPoint}')"><i class="material-icons">keyboard_arrow_left</i></button>
+                <div class="pagination_txt">${this.currentPage} de ${this.pageSize}</div>
+                <button class="btn" onclick="RickMortyController.previuos('${endPoint}')"><i class="material-icons">keyboard_arrow_right</i></button>
+            </div>
         `;
-        $('container').html(cardContainerHTML);
+        $('#container').html(htmlContent);
     }
 
     this.pageSize = 0;
@@ -137,6 +150,10 @@ RickMortyController.getInstance = () => {
     if (RickMortyController.instance == null)
         RickMortyController.instance = new RickMortyController();
     return RickMortyController.instance;
+}
+
+RickMortyController.init = () => {
+    RickMortyController.getInstance().init();
 }
 
 RickMortyController.getCharacters = (parameter, value) => {
