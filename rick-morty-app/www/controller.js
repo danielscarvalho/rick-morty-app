@@ -5,6 +5,7 @@ function RickMortyController() {
     }
 
     this.getCharacters = (parameter, value) => {
+        RickMortyController.showLoading(true);
         fetch(`https://rickandmortyapi.com/api/character/?${parameter}=${value}`)
             .then(response => response.json())
             .then(characters => {
@@ -12,10 +13,15 @@ function RickMortyController() {
                 this.pageSize = characters.info.pages;
                 console.log(characters.results);
                 RickMortyController.buildCharacters(characters.results);
-            }).catch(error => console.log(error));
+            })
+            .catch(error => console.log(error))
+            .finally(() => {
+                RickMortyController.showLoading(false);
+            });
     }
 
     this.getLocations = (parameter, value) => {
+        RickMortyController.showLoading(true);
         fetch(`https://rickandmortyapi.com/api/location/?${parameter}=${value}`)
             .then(response => response.json())
             .then(locations => {
@@ -23,10 +29,15 @@ function RickMortyController() {
                 this.pageSize = locations.info.pages;
                 console.log(locations.results);
                 RickMortyController.buildLocations(locations.results);
-            }).catch(error => console.log(error));
+            })
+            .catch(error => console.log(error))
+            .finally(() => {
+                RickMortyController.showLoading(false);
+            });
     }
 
     this.getEpisodes = (parameter, value) => {
+        RickMortyController.showLoading(true);
         fetch(`https://rickandmortyapi.com/api/episode/?${parameter}=${value}`)
             .then(response => response.json())
             .then(episodes => {
@@ -34,7 +45,11 @@ function RickMortyController() {
                 this.pageSize = episodes.info.pages;
                 console.log(episodes.results);
                 RickMortyController.buildEpisodes(episodes.results);
-            }).catch(error => console.log(error));
+            })
+            .catch(error => console.log(error))
+            .finally(() => {
+                RickMortyController.showLoading(false);
+            });
     }
 
     this.buildCharacters = (results) => {
@@ -88,9 +103,9 @@ function RickMortyController() {
     this.buildPaginationControl = (endPoint) => {
         return `
             <div class="cflex_row cflex_jc_center cflex_ai_center">
-                <button class="btn pagination_btn" onclick="RickMortyController.next('${endPoint}')"><i class="material-icons">keyboard_arrow_left</i></button>
+                <button class="btn pagination_btn" onclick="RickMortyController.previuos('${endPoint}')"><i class="material-icons">keyboard_arrow_left</i></button>
                 <div class="pagination_txt">${this.currentPage} de ${this.pageSize}</div>
-                <button class="btn pagination_btn" onclick="RickMortyController.previuos('${endPoint}')"><i class="material-icons">keyboard_arrow_right</i></button>
+                <button class="btn pagination_btn" onclick="RickMortyController.next('${endPoint}')"><i class="material-icons">keyboard_arrow_right</i></button>
             </div>
         `;
     }
@@ -120,6 +135,18 @@ function RickMortyController() {
         if (endPoint == 'character') RickMortyController.getCharacters(parameter, value);
         else if (endPoint == 'location') RickMortyController.getLocations(parameter, value);
         else if (endPoint == 'episode') RickMortyController.getEpisodes(parameter, value);
+    }
+
+    this.menuOption = (endPoint) => {
+        this.currentPage = 1;
+        if (endPoint == 'character') RickMortyController.getCharacters();
+        else if (endPoint == 'location') RickMortyController.getLocations();
+        else if (endPoint == 'episode') RickMortyController.getEpisodes();
+    }
+
+    this.showLoading = (show) => {
+        if (show) $('#loading').show();
+        else $('#loading').hide();
     }
 
 }
@@ -170,4 +197,10 @@ RickMortyController.seachTerm = (endPoint) => {
 }
 RickMortyController.directEndPoint = (endPoint, parameter, value) => {
     RickMortyController.getInstance().directEndPoint(endPoint, parameter, value);
+}
+RickMortyController.menuOption = (endPoint) => {
+    RickMortyController.getInstance().menuOption(endPoint);
+}
+RickMortyController.showLoading = (show) => {
+    RickMortyController.getInstance().showLoading(show);
 }
