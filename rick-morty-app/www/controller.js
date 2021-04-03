@@ -55,9 +55,9 @@ function RickMortyController() {
 
         htmlContent += `
             <div class="cflex_row cflex_jc_center cflex_ai_center">
-                <button class="btn" onclick="RickMortyController.next('${endPoint}')"><i class="material-icons">keyboard_arrow_left</i></button>
+                <button class="btn pagination_btn" onclick="RickMortyController.next('${endPoint}')"><i class="material-icons">keyboard_arrow_left</i></button>
                 <div class="pagination_txt">${this.currentPage} de ${this.pageSize}</div>
-                <button class="btn" onclick="RickMortyController.previuos('${endPoint}')"><i class="material-icons">keyboard_arrow_right</i></button>
+                <button class="btn pagination_btn" onclick="RickMortyController.previuos('${endPoint}')"><i class="material-icons">keyboard_arrow_right</i></button>
             </div>
         `;
         $('#container').html(htmlContent);
@@ -81,9 +81,9 @@ function RickMortyController() {
 
         htmlContent += `
             <div class="cflex_row cflex_jc_center cflex_ai_center">
-                <button class="btn" onclick="RickMortyController.next('${endPoint}')"><i class="material-icons">keyboard_arrow_left</i></button>
+                <button class="btn pagination_btn" onclick="RickMortyController.next('${endPoint}')"><i class="material-icons">keyboard_arrow_left</i></button>
                 <div class="pagination_txt">${this.currentPage} de ${this.pageSize}</div>
-                <button class="btn" onclick="RickMortyController.previuos('${endPoint}')"><i class="material-icons">keyboard_arrow_right</i></button>
+                <button class="btn pagination_btn" onclick="RickMortyController.previuos('${endPoint}')"><i class="material-icons">keyboard_arrow_right</i></button>
             </div>
         `;
         $('#container').html(htmlContent);
@@ -107,9 +107,9 @@ function RickMortyController() {
 
         htmlContent += `
             <div class="cflex_row cflex_jc_center cflex_ai_center">
-                <button class="btn" onclick="RickMortyController.next('${endPoint}')"><i class="material-icons">keyboard_arrow_left</i></button>
+                <button class="btn pagination_btn" onclick="RickMortyController.next('${endPoint}')"><i class="material-icons">keyboard_arrow_left</i></button>
                 <div class="pagination_txt">${this.currentPage} de ${this.pageSize}</div>
-                <button class="btn" onclick="RickMortyController.previuos('${endPoint}')"><i class="material-icons">keyboard_arrow_right</i></button>
+                <button class="btn pagination_btn" onclick="RickMortyController.previuos('${endPoint}')"><i class="material-icons">keyboard_arrow_right</i></button>
             </div>
         `;
         $('#container').html(htmlContent);
