@@ -1,3 +1,4 @@
+
 function RickMortyController() {
 
     this.init = () => {
@@ -13,6 +14,11 @@ function RickMortyController() {
                 console.log(characters.results);
                 RickMortyController.buildCharacters(characters.results);
             }).catch(error => console.log(error));
+    }
+
+    this.getCharacter = (characterId) => {
+        return fetch(`https://rickandmortyapi.com/api/character/${characterId}`)
+            .then(response => response.json());
     }
 
     this.getLocations = (parameter, value) => {
@@ -42,13 +48,55 @@ function RickMortyController() {
 
         results.forEach(item => {
             htmlContent += `
-                <div>${item.name}</div>
+                <div data-id=${item.id}" onclick="RickMortyController.showModal(${item.id})">${item.name}</div>
             `;
         });
 
         htmlContent += RickMortyController.buildPaginationControl('character');
         $('#container').html(htmlContent);
     }
+
+    this.buildDetailedCharacter = (detailedCharacter) => {
+        let htmlContent = `
+            <img class="modal_image" src="${detailedCharacter.image}" />
+            <div class="modal-content">
+                <h4>${detailedCharacter.name}</h4>
+                <h5>Status: ${detailedCharacter.status}</h5>
+                <h5>Espécie: ${detailedCharacter.species}</h5>
+                <h5>Gênero: ${detailedCharacter.gender}</h5>
+                <button class="btn back_btn" onclick="RickMortyController.closeModal()"> voltar </button>
+            </div>
+        `;
+        $('#core_modal').html(htmlContent);
+    }
+
+    this.buildDetailedLocation = (detailedLocation) => {
+        let htmlContent = `
+            <img class="modal_image" src="${detailedLocation.image}" />
+            <div class="modal-content">
+                <h4>${detailedLocation.name}</h4>
+                <h5>Status: ${detailedLocation.status}</h5>
+                <h5>Espécie: ${detailedLocation.species}</h5>
+                <h5>Gênero: ${detailedLocation.gender}</h5>
+                <button class="btn back_btn" onclick="RickMortyController.closeModal()"> voltar </button>
+            </div>
+        `;
+        $('#core_modal').html(htmlContent);
+    }
+
+    this.showModal = (characterId) => {
+        RickMortyController.getCharacter(characterId)
+            .then(detailedCharacter => {
+                RickMortyController.buildDetailedCharacter(detailedCharacter);
+            })
+            .then(() => {
+                $('#core_modal').modal('open');
+            });
+    };
+
+    this.closeModal = () => {
+        $('#core_modal').modal('close');
+    };
 
     this.buildLocations = (results) => {
         let htmlContent = RickMortyController.buildSearchInput('location');
@@ -135,6 +183,10 @@ RickMortyController.getInstance = () => {
 RickMortyController.init = () => {
     RickMortyController.getInstance().init();
 }
+
+RickMortyController.getCharacter = (characterId) => {
+    return RickMortyController.getInstance().getCharacter(characterId);
+}
 RickMortyController.getCharacters = (parameter, value) => {
     RickMortyController.getInstance().getCharacters(parameter, value);
 }
@@ -147,9 +199,18 @@ RickMortyController.getEpisodes = (parameter, value) => {
 RickMortyController.buildCharacters = (results) => {
     RickMortyController.getInstance().buildCharacters(results);
 }
+RickMortyController.buildDetailedCharacter = (result) => {
+    RickMortyController.getInstance().buildDetailedCharacter(result);
+}
 RickMortyController.buildLocations = (results) => {
     RickMortyController.getInstance().buildLocations(results);
 }
+RickMortyController.showModal = (characterId) => {
+ RickMortyController.getInstance().showModal(characterId);
+};
+RickMortyController.closeModal = () => {
+ RickMortyController.getInstance().closeModal();
+};
 RickMortyController.buildEpisodes = (results) => {
     RickMortyController.getInstance().buildEpisodes(results);
 }
