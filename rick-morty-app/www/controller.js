@@ -159,7 +159,7 @@ function RickMortyController() {
 
     this.buildDetailedLocation = (detailedLocation) => {
         let htmlContent = `
-            <img class="modal_image" src="/img/default-location-image.jpg" />
+            <img class="modal_image" src="./img/default-location-image.jpg" />
             <div class="modal-content">
                 <h4>${detailedLocation.name}</h4>
                 <h5>Tipo: ${detailedLocation.type}</h5>
@@ -172,7 +172,7 @@ function RickMortyController() {
 
     this.buildDetailedEpisode = (detailedEpisode) => {
         let htmlContent = `
-            <img class="modal_image" src="/img/default-episode-image.jpg" />
+            <img class="modal_image" src="./img/default-episode-image.jpg" />
             <div class="modal-content">
                 <h4>${detailedEpisode.name}</h4>
                 <h5>Data de lançamento: ${detailedEpisode.releaseDate}</h5>
@@ -246,6 +246,7 @@ function RickMortyController() {
         if (this.currentPage < this.pageSize) {
             this.currentPage++;
             RickMortyController.directEndPoint(endPoint, 'page', this.currentPage);
+            $(window).scrollTop(0);
         }
     }
 
@@ -253,10 +254,12 @@ function RickMortyController() {
         if (this.currentPage > 1) {
             this.currentPage--;
             RickMortyController.directEndPoint(endPoint, 'page', this.currentPage);
+            $(window).scrollTop(0);
         }
     }
 
     this.seachTerm = (endPoint) => {
+        this.currentPage = 1;
         RickMortyController.directEndPoint(endPoint, 'name', $('#input-search').val());
     }
 
