@@ -57,7 +57,22 @@ function RickMortyController() {
 
         results.forEach(item => {
             htmlContent += `
-                <div>${item.name}</div>
+                <div class="row">
+                    <div class="col s12 m6">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src=${item.image}>
+                                
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title">${item.name}</span>
+                                <p>Status: ${item.status}</p>
+                                <p>Species: ${item.species}</p>
+                                <p>Gender: ${item.gender}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             `;
         });
 
@@ -70,7 +85,20 @@ function RickMortyController() {
 
         results.forEach(item => {
             htmlContent += `
-                <div>${item.name}</div>
+            <div class="row">
+                <div class="col s12 m6">
+                    <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                            <span class="card-title">${item.name}</span>
+                            <p>Type: ${item.type}</p>
+                            <p>Dimension: ${item.dimension}</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">Possível link para detalhes do cenário</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             `;
         });
 
@@ -83,7 +111,20 @@ function RickMortyController() {
 
         results.forEach(item => {
             htmlContent += `
-                <div>${item.name}</div>
+            <div class="row">
+                <div class="col s12 m6">
+                    <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                            <span class="card-title">${item.name}</span>
+                            <p>Release date: ${item.air_date}</p>
+                            <p>Episode: ${item.episode}</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">Possível link para detalhes do episódio</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             `;
         });
 
