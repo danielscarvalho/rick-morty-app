@@ -21,11 +21,6 @@ function RickMortyController() {
             });
     }
 
-    this.getCharacter = (characterId) => {
-        return fetch(`https://rickandmortyapi.com/api/character/${characterId}`)
-            .then(response => response.json());
-    }
-
     this.getLocations = (parameter, value) => {
         RickMortyController.showLoading(true);
         fetch(`https://rickandmortyapi.com/api/location/?${parameter}=${value}`)
@@ -58,12 +53,27 @@ function RickMortyController() {
             });
     }
 
+    this.getCharacter = (characterId) => {
+        return fetch(`https://rickandmortyapi.com/api/character/${characterId}`)
+            .then(response => response.json());
+    }
+
+    this.getLocation = (locationId) => {
+        return fetch(`https://rickandmortyapi.com/api/location/${locationId}`)
+            .then(response => response.json());
+    }
+
+    this.getEpisode = (episodeId) => {
+        return fetch(`https://rickandmortyapi.com/api/episode/${episodeId}`)
+            .then(response => response.json());
+    }
+
     this.buildCharacters = (results) => {
         let htmlContent = RickMortyController.buildSearchInput('character');
 
         results.forEach(item => {
             htmlContent += `
-                <div class="row" onclick="RickMortyController.showModal(${item.id})">
+                <div class="row card_container" onclick="RickMortyController.showModal(${item.id}, 'character')">
                     <div class="col s12 m6">
                         <div class="card">
                             <div class="card-image">
@@ -72,9 +82,6 @@ function RickMortyController() {
                             </div>
                             <div class="card-content">
                                 <span class="card-title">${item.name}</span>
-                                <p>Status: ${item.status}</p>
-                                <p>Species: ${item.species}</p>
-                                <p>Gender: ${item.gender}</p>
                             </div>
                         </div>
                     </div>
@@ -83,6 +90,56 @@ function RickMortyController() {
         });
 
         htmlContent += RickMortyController.buildPaginationControl('character');
+        $('#container').html(htmlContent);
+    }
+
+    this.buildLocations = (results) => {
+        let htmlContent = RickMortyController.buildSearchInput('location');
+
+        results.forEach(item => {
+            htmlContent += `
+            <div class="row card_container" onclick="RickMortyController.showModal(${item.id}, 'location')">
+                <div class="col s12 m6">
+                    <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                            <span class="card-title">${item.name}</span>
+                            <p>Tipo: ${item.type}</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">Mais detalhes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
+        });
+
+        htmlContent += RickMortyController.buildPaginationControl('location');
+        $('#container').html(htmlContent);
+    }
+
+    this.buildEpisodes = (results) => {
+        let htmlContent = RickMortyController.buildSearchInput('episode');
+
+        results.forEach(item => {
+            htmlContent += `
+            <div class="row card_container" onclick="RickMortyController.showModal(${item.id}, 'episode')">
+                <div class="col s12 m6">
+                    <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                            <span class="card-title">${item.name}</span>
+                            <p>Episódio: ${item.episode}</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">Mais detalhes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
+        });
+
+        htmlContent += RickMortyController.buildPaginationControl('episode');
         $('#container').html(htmlContent);
     }
 
@@ -102,83 +159,66 @@ function RickMortyController() {
 
     this.buildDetailedLocation = (detailedLocation) => {
         let htmlContent = `
-            <img class="modal_image" src="${detailedLocation.image}" />
+            <img class="modal_image" src="/img/default-location-image.jpg" />
             <div class="modal-content">
                 <h4>${detailedLocation.name}</h4>
-                <h5>Status: ${detailedLocation.status}</h5>
-                <h5>Espécie: ${detailedLocation.species}</h5>
-                <h5>Gênero: ${detailedLocation.gender}</h5>
+                <h5>Tipo: ${detailedLocation.type}</h5>
+                <h5>Dimensão: ${detailedLocation.dimension}</h5>
                 <button class="btn back_btn" onclick="RickMortyController.closeModal()"> voltar </button>
             </div>
         `;
         $('#core_modal').html(htmlContent);
     }
 
-    this.showModal = (characterId) => {
-        RickMortyController.getCharacter(characterId)
-            .then(detailedCharacter => {
-                RickMortyController.buildDetailedCharacter(detailedCharacter);
-            })
-            .then(() => {
-                $('#core_modal').modal('open');
-            });
+    this.buildDetailedEpisode = (detailedEpisode) => {
+        let htmlContent = `
+            <img class="modal_image" src="/img/default-episode-image.jpg" />
+            <div class="modal-content">
+                <h4>${detailedEpisode.name}</h4>
+                <h5>Data de lançamento: ${detailedEpisode.releaseDate}</h5>
+                <h5>Episódio: ${detailedEpisode.episode}</h5>
+                <button class="btn back_btn" onclick="RickMortyController.closeModal()"> voltar </button>
+            </div>
+        `;
+        $('#core_modal').html(htmlContent);
+    }
+
+    this.showModal = (resourceId, resourceToShow) => {
+        switch (resourceToShow) {
+            case 'character':
+                RickMortyController.getCharacter(resourceId)
+                .then(detailedCharacter => {
+                    RickMortyController.buildDetailedCharacter(detailedCharacter);
+                })
+                .then(() => {
+                    $('#core_modal').modal('open');
+                });
+                break;
+            case 'location':
+                RickMortyController.getLocation(resourceId)
+                .then(detailedLocation => {
+                    RickMortyController.buildDetailedLocation(detailedLocation);
+                })
+                .then(() => {
+                    $('#core_modal').modal('open');
+                });
+                break;
+            default:
+                RickMortyController.getEpisode(resourceId)
+                .then(detailedEpisode => {
+                    RickMortyController.buildDetailedEpisode(detailedEpisode);
+                })
+                .then(() => {
+                    $('#core_modal').modal('open');
+                });
+                break;
+
+        }
     };
 
     this.closeModal = () => {
         $('#core_modal').modal('close');
     };
-
-    this.buildLocations = (results) => {
-        let htmlContent = RickMortyController.buildSearchInput('location');
-
-        results.forEach(item => {
-            htmlContent += `
-            <div class="row">
-                <div class="col s12 m6">
-                    <div class="card blue-grey darken-1">
-                        <div class="card-content white-text">
-                            <span class="card-title">${item.name}</span>
-                            <p>Type: ${item.type}</p>
-                            <p>Dimension: ${item.dimension}</p>
-                        </div>
-                        <div class="card-action">
-                            <a href="#">Possível link para detalhes do cenário</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            `;
-        });
-
-        htmlContent += RickMortyController.buildPaginationControl('location');
-        $('#container').html(htmlContent);
-    }
-
-    this.buildEpisodes = (results) => {
-        let htmlContent = RickMortyController.buildSearchInput('episode');
-
-        results.forEach(item => {
-            htmlContent += `
-            <div class="row">
-                <div class="col s12 m6">
-                    <div class="card blue-grey darken-1">
-                        <div class="card-content white-text">
-                            <span class="card-title">${item.name}</span>
-                            <p>Release date: ${item.air_date}</p>
-                            <p>Episode: ${item.episode}</p>
-                        </div>
-                        <div class="card-action">
-                            <a href="#">Possível link para detalhes do episódio</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            `;
-        });
-
-        htmlContent += RickMortyController.buildPaginationControl('episode');
-        $('#container').html(htmlContent);
-    }
 
     this.buildSearchInput = (endPoint) => {
         return `
@@ -252,9 +292,6 @@ RickMortyController.init = () => {
     RickMortyController.getInstance().init();
 }
 
-RickMortyController.getCharacter = (characterId) => {
-    return RickMortyController.getInstance().getCharacter(characterId);
-}
 RickMortyController.getCharacters = (parameter, value) => {
     RickMortyController.getInstance().getCharacters(parameter, value);
 }
@@ -264,24 +301,39 @@ RickMortyController.getLocations = (parameter, value) => {
 RickMortyController.getEpisodes = (parameter, value) => {
     RickMortyController.getInstance().getEpisodes(parameter, value);
 }
+RickMortyController.getCharacter = (characterId) => {
+    return RickMortyController.getInstance().getCharacter(characterId);
+}
+RickMortyController.getLocation = (locationId) => {
+    return RickMortyController.getInstance().getLocation(locationId);
+}
+RickMortyController.getEpisode = (episodeId) => {
+    return RickMortyController.getInstance().getEpisode(episodeId);
+}
 RickMortyController.buildCharacters = (results) => {
     RickMortyController.getInstance().buildCharacters(results);
-}
-RickMortyController.buildDetailedCharacter = (result) => {
-    RickMortyController.getInstance().buildDetailedCharacter(result);
 }
 RickMortyController.buildLocations = (results) => {
     RickMortyController.getInstance().buildLocations(results);
 }
-RickMortyController.showModal = (characterId) => {
- RickMortyController.getInstance().showModal(characterId);
+RickMortyController.buildEpisodes = (results) => {
+    RickMortyController.getInstance().buildEpisodes(results);
+}
+RickMortyController.buildDetailedCharacter = (result) => {
+    RickMortyController.getInstance().buildDetailedCharacter(result);
+}
+RickMortyController.buildDetailedLocation = (result) => {
+    RickMortyController.getInstance().buildDetailedLocation(result);
+}
+RickMortyController.buildDetailedEpisode = (result) => {
+    RickMortyController.getInstance().buildDetailedEpisode(result);
+}
+RickMortyController.showModal = (resourceId, resourceToShow) => {
+ RickMortyController.getInstance().showModal(resourceId, resourceToShow);
 };
 RickMortyController.closeModal = () => {
  RickMortyController.getInstance().closeModal();
 };
-RickMortyController.buildEpisodes = (results) => {
-    RickMortyController.getInstance().buildEpisodes(results);
-}
 RickMortyController.buildSearchInput = (endPoint) => {
     return RickMortyController.getInstance().buildSearchInput(endPoint);
 }

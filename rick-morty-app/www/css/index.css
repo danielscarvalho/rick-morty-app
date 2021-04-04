@@ -1,3 +1,7 @@
+body {
+    padding: .5rem;
+}
+
 .cflex_col {
     display: flex;
     flex-direction: column;
@@ -67,7 +71,7 @@
 
 .modal {
     width: 90vw;
-    min-height: 87.5vh;
+    max-height: 87.5vh;
     overflow: scroll;
 }
 
@@ -94,6 +98,10 @@
 .modal .modal_image {
     width: 100%;
     max-height: 50%;
+}
+
+.card_container {
+    width: 90%;
 }
 
 .pagination_btn:hover {
