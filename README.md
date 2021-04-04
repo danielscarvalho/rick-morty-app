@@ -1,13 +1,13 @@
-# Rick and Morty Application #
+# Rick and Morty Application
 
-## Membros ##
-Anderson Dias   081180002
-Rachel Moreira  081180045
-Renan Castro    081180029
-Wellison Sousa  081180040
-Wesley Rogério  081180035
+## Membros
+#### Anderson Dias   081180002
+#### Rachel Moreira  081180045
+#### Renan Castro    081180029
+#### Wellison Sousa  081180040
+#### Wesley Rogério  081180035
 
-## Features ##
+## Features
 * exibir personagens
 * exibir locais
 * exibir episódios
@@ -15,11 +15,13 @@ Wesley Rogério  081180035
 * filtragem por nome
 * paginação
 
-## Instructions ##
-* cordova platform add browser
-* cordova run browser
+## Instructions
+```
+cordova platform add browser
+cordova run browser
 
-* cordova build
+cordova build
 
-* cordova platform add android@6.4.0
-* cordova run android
+cordova platform add android@6.4.0
+cordova run android
+```
