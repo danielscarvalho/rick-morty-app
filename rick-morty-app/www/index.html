@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
     <head>
         <meta charset="utf-8">
 
@@ -18,7 +19,7 @@
 
         <link rel="stylesheet" href="css/index.css">
         <script type="text/javascript" src="controller.js"></script>
-        
+
 
         <script type="text/javascript">
             window.onload = function () {
@@ -26,10 +27,13 @@
                 var instance = new M.Sidenav(elem);
 
                 RickMortyController.init();
+
+                $('.modal').modal();
             }
         </script>
-        
+
     </head>
+
     <body>
 
         <div id="loading" class="cflex_row cflex_ai_center cflex_jc_center loading">
@@ -67,8 +71,11 @@
         </ul>
         <a data-target="slide-out" class="btn sidenav-trigger sidenav_btn"><i class="material-icons">menu</i></a>
 
-
         <div id="container" class="cflex_col"></div>
 
+        <div id="core_modal" class="modal">
+            
+        </div>
     </body>
+
 </html>

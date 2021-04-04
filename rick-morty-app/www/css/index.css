@@ -1,3 +1,7 @@
+body {
+    padding: .5rem;
+}
+
 .cflex_col {
     display: flex;
     flex-direction: column;
@@ -51,12 +55,7 @@
 }
 
 .sidenav_btn {
-    background-color: gray;
     margin: 5px;
-}
-
-.sidenav_btn:hover {
-    background-color: #9e9e9e;
 }
 
 .search_input {
@@ -65,21 +64,44 @@
     height: 35px !important;
 }
 
-.search_btn {
-    background-color: gray;
-}
-
-.search_btn:hover {
-    background-color: #9e9e9e;
-}
-
 .pagination_txt {
     margin-right: 10px;
     margin-left: 10px;
 }
 
-.pagination_btn {
-    background-color: gray;
+.modal {
+    width: 90vw;
+    max-height: 87.5vh;
+    overflow: scroll;
+}
+
+.modal .modal-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modal .modal-content h4 {
+    padding: 0;
+    margin: 0;
+}
+
+.modal .modal-content h5 {
+    margin-top: .25rem;
+}
+
+.modal .modal-content .back_btn {
+    margin-top: 1rem;
+}
+
+.modal .modal_image {
+    width: 100%;
+    max-height: 50%;
+}
+
+.card_container {
+    width: 90%;
 }
 
 .pagination_btn:hover {
