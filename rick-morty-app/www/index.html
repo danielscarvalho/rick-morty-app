@@ -36,22 +36,35 @@
 
     <body>
 
+        <div id="loading" class="cflex_row cflex_ai_center cflex_jc_center loading">
+            <div class="preloader-wrapper big active">
+                <div class="spinner-layer spinner-blue-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <ul id="slide-out" class="sidenav">
             <li>
-                <div class="cflex_row sidenav_item cflex_ai_center waves-effect sidenav-close"
-                    onclick="RickMortyController.getCharacters()">
+                <div class="cflex_row sidenav_item cflex_ai_center waves-effect sidenav-close" onclick="RickMortyController.menuOption('character')">
                     <i class="material-icons sidenav_icon">person</i>Personagens
                 </div>
             </li>
             <li>
-                <div class="cflex_row sidenav_item cflex_ai_center waves-effect sidenav-close"
-                    onclick="RickMortyController.getLocations()">
+                <div class="cflex_row sidenav_item cflex_ai_center waves-effect sidenav-close" onclick="RickMortyController.menuOption('location')">
                     <i class="material-icons sidenav_icon">location_on</i>Locais
                 </div>
             </li>
             <li>
-                <div class="cflex_row sidenav_item cflex_ai_center waves-effect sidenav-close"
-                    onclick="RickMortyController.getEpisodes()">
+                <div class="cflex_row sidenav_item cflex_ai_center waves-effect sidenav-close" onclick="RickMortyController.menuOption('episode')">
                     <i class="material-icons sidenav_icon">live_tv</i>Episódios
                 </div>
             </li>
