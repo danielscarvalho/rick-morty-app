@@ -10,9 +10,7 @@ function RickMortyController() {
         fetch(`https://rickandmortyapi.com/api/character/?${parameter}=${value}`)
             .then(response => response.json())
             .then(characters => {
-                console.log('page number -> ' + characters.info.pages);
                 this.pageSize = characters.info.pages;
-                console.log(characters.results);
                 RickMortyController.buildCharacters(characters.results);
             })
             .catch(error => console.log(error))
@@ -26,9 +24,7 @@ function RickMortyController() {
         fetch(`https://rickandmortyapi.com/api/location/?${parameter}=${value}`)
             .then(response => response.json())
             .then(locations => {
-                console.log('page number -> ' + locations.info.pages);
                 this.pageSize = locations.info.pages;
-                console.log(locations.results);
                 RickMortyController.buildLocations(locations.results);
             })
             .catch(error => console.log(error))
@@ -42,9 +38,7 @@ function RickMortyController() {
         fetch(`https://rickandmortyapi.com/api/episode/?${parameter}=${value}`)
             .then(response => response.json())
             .then(episodes => {
-                console.log('page number -> ' + episodes.info.pages);
                 this.pageSize = episodes.info.pages;
-                console.log(episodes.results);
                 RickMortyController.buildEpisodes(episodes.results);
             })
             .catch(error => console.log(error))
