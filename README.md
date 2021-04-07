@@ -1,5 +1,7 @@
 # Rick and Morty Application
 
+[API Documentation](https://rickandmortyapi.com/documentation)
+
 ## Membros
 #### Anderson Dias &nbsp;&nbsp;&nbsp; 081180002
 #### Rachel Moreira &nbsp;&nbsp; 081180045
