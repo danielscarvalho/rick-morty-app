@@ -30,3 +30,5 @@ cordova build
 cordova platform add android@6.4.0
 cordova run android
 ```
+
+![app img](images/menu.jpeg)
